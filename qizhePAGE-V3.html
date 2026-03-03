@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qizhe Shao · Developmental Biology</title>
+    <!-- 字体与图标库 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f4f7fc;
+            color: #1a2b3c;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -18px rgba(0,40,70,0.25);
+            overflow: hidden;
+            padding: 2.5rem 2.8rem;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .page { padding: 1.8rem 1.2rem; }
+        }
+
+        /* 头部 */
+        .header {
+            display: flex;
+            gap: 2.2rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #e9ecf0;
+            padding-bottom: 2rem;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 12px 22px -10px rgba(27, 60, 100, 0.3);
+            background: #e6edf5;
+        }
+        .header-content h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #11324d;
+            margin-bottom: 0.3rem;
+        }
+        .interest-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin: 0.7rem 0 0.2rem;
+        }
+        .interest-tags span {
+            background: #e6f0fa;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1d6091;
+            border: 1px solid #c5ddf2;
+        }
+        .badge-phd {
+            background: #d6e5f5;
+            color: #0f4166;
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 0.4rem;
+        }
+
+        /* 通用章节 */
+        .section {
+            margin: 2.8rem 0 2.2rem;
+            scroll-margin-top: 1rem;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #1e405e;
+            border-left: 6px solid #3c8dbc;
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .section-title i {
+            color: #3c8dbc;
+            font-size: 1.9rem;
+        }
+
+        /* 教育卡片 */
+        .edu-list {
+            list-style: none;
+            padding: 0;
+        }
+        .edu-list li {
+            background: #f9fcff;
+            border: 1px solid #deecf5;
+            border-radius: 24px;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.8rem 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,30,50,0.04);
+        }
+        .edu-date {
+            background: #daeaf5;
+            color: #145779;
+            font-weight: 600;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            letter-spacing: -0.01em;
+        }
+        .edu-desc {
+            font-weight: 500;
+            color: #1e3c55;
+        }
+
+        /* 出版物列表 */
+        .pub-list {
+            list-style: none;
+            padding: 0;
+        }
+        .pub-item {
+            background: #ffffff;
+            border-bottom: 1px solid #e7eef6;
+            padding: 1.4rem 1rem 1.4rem 2rem;
+            transition: background 0.15s, border-color 0.15s;
+            border-radius: 12px;
+            margin-bottom: 0.2rem;
+            position: relative;
+        }
+        .pub-item:hover {
+            background: #f6faff;
+            border-bottom-color: transparent;
+            box-shadow: 0 4px 12px rgba(37, 95, 150, 0.08);
+        }
+        .pub-item::before {
+            content: "📄";
+            position: absolute;
+            left: -0.3rem;
+            top: 1.5rem;
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+        .pub-title {
+            font-weight: 600;
+            color: #022b44;
+            margin-right: 0.5rem;
+        }
+        .pub-authors strong {
+            color: #0d4c78;
+            background: #e2f0ff;
+            font-weight: 600;
+            padding: 0 0.2rem;
+            border-radius: 4px;
+        }
+        .pub-journal {
+            font-style: italic;
+            color: #5b6f82;
+        }
+        .pub-status {
+            display: inline-block;
+            background: #e3effa;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1a6791;
+            border: 1px solid #b9d6ef;
+            margin-left: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            vertical-align: middle;
+        }
+        .pub-cofirst {
+            background: #fdefe4;
+            color: #b3511d;
+            border-color: #f8cfb5;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            margin-left: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* 联系区域 */
+        .contact-card {
+            background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 80%);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            border: 1px solid #d1e2f2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.8rem 2rem;
+            box-shadow: 0 8px 18px -6px #c5d9ec;
+        }
+        .contact-email-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .contact-email-group i {
+            font-size: 2rem;
+            color: #1e6a9f;
+            background: white;
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 12px rgba(52, 112, 170, 0.15);
+        }
+        .emails a {
+            color: #155a8c;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dotted #9bbfd9;
+            margin-right: 1rem;
+        }
+        .emails a:hover {
+            color: #0a2f4a;
+            border-bottom-style: solid;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .social-links a {
+            color: #316d99;
+            font-size: 2.2rem;
+            line-height: 1;
+            transition: transform 0.1s, color 0.1s;
+        }
+        .social-links a:hover {
+            transform: scale(1.1);
+            color: #134872;
+        }
+        .availability {
+            margin-top: 1.5rem;
+            background: #ebf4fa;
+            border-radius: 60px;
+            padding: 0.9rem 2rem;
+            text-align: center;
+            border: 1px solid #bed9f0;
+            color: #134872;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .availability i {
+            font-size: 1.3rem;
+            color: #2575b0;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: #778e9f;
+            text-align: center;
+            border-top: 1px solid #deeaf4;
+            padding-top: 1.5rem;
+        }
+
+        /* 辅助 */
+        .note-italic {
+            font-size: 0.9rem;
+            color: #58758b;
+            margin-top: 1rem;
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 头部区域 -->
+    <div class="header">
+    <img src="sqz.png" alt="Qizhe Shao" class="avatar" style="width: 140px; height: 140px;">
+    <div class="header-content">
+        <h1>Qizhe Shao <span style="font-size: 1.2rem; font-weight: 400; color: #487a9e; margin-left: 0.5rem;">(邵奇哲)</span></h1>
+        <div class="badge-phd"><i class="fa-regular fa-star"></i> PhD Candidate · Zhejiang University (2021–2026)</div>
+        <div class="interest-tags">
+            <span><i class="fa-regular fa-microscope"></i> Human embryonic development</span>
+            <span><i class="fa-regular fa-dna"></i> RNA modifications (m⁶A)</span>
+            <span><i class="fa-regular fa-capsules"></i> P-body / Membraneless organelles</span>
+        </div>
+        <p style="margin: 0.8rem 0 1rem; color: #2c506e; max-width: 550px;">
+            Investigating how RNA regulation and processing bodies orchestrate human cell fate determination. 
+        </p>
+        <!-- 快捷联系（无CV） -->
+        <div style="display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; align-items: center;">
+            <div style="display: flex; gap: 1rem;">
+                <a href="mailto:qizhe.21@intl.zju.edu.cn" style="color: #1e6a9f; font-weight: 500; border-bottom: 1px dotted #9bbfd9;">
+                    <i class="fa-regular fa-envelope" style="margin-right: 0.3rem;"></i>Email
+                </a>
+                <a href="https://orcid.org/0009-0001-8572-7019" target="_blank" style="color: #1e6a9f; font-weight: 500; border-bottom: 1px dotted #9bbfd9;">
+                    <i class="fa-brands fa-orcid" style="margin-right: 0.3rem;"></i>ORCID
+                </a>
+                <a href="https://github.com/Qizhe0521" target="_blank" style="color: #1e6a9f; font-weight: 500; border-bottom: 1px dotted #9bbfd9;">
+                    <i class="fa-brands fa-github" style="margin-right: 0.3rem;"></i>GitHub
+                </a>
+            </div>
+        </div>
+        <!-- 新增：荣誉亮点 -->
+        <div style="margin-top: 1rem; background: #f0f8ff; border-radius: 40px; padding: 0.5rem 1.2rem; display: inline-block; border: 1px solid #cde3f5;">
+            <i class="fa-regular fa-trophy" style="color: #2575b0; margin-right: 0.5rem;"></i>
+            <span style="font-size: 0.9rem; font-weight: 500; color: #1b4d72;">
+                <strong>Selected honors:</strong> National Scholarship 2025
+            </span>
+        </div>
+    </div>
+</div>
+
+    <!-- 教育经历 -->
+    <section class="section" id="education">
+        <h2 class="section-title"><i class="fa-regular fa-graduation-cap"></i> Education</h2>
+        <ul class="edu-list">
+            <li>
+                <span class="edu-date">2017 – 2021</span>
+                <span class="edu-desc">Zhejiang University-University of Edinburgh Institute (ZJU-UoE), Dual Degree Bachelor</span>
+            </li>
+            <li>
+                <span class="edu-date">2021 – 2026</span>
+                <span class="edu-desc">Zhejiang University-University of Edinburgh Institute (ZJU-UoE), Dual Degree PhD</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- 出版物 (完全保留原始内容，仅添加状态标签增强可读性) -->
+    <section class="section" id="publications">
+        <h2 class="section-title"><i class="fa-regular fa-file-lines"></i> Publications</h2>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <span class="pub-authors">Lan, Y., Xia, Z., <strong>Shao, Q. (Co-first)</strong>, Lin, P., Lu, J., Xiao, X., Zheng, M., Chen, D., Dou, Y., & Xie, Q. (2025).</span> 
+                <span class="pub-title">Synonymous mutations promote tumorigenesis by disrupting m6A-dependent mRNA metabolism.</span> 
+                <span class="pub-journal"><strong>Cell</strong>.</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors"><strong>Shao, Q.</strong>, Xiao, X., Wang, Z., Zhang, J., … Chen, D. (2026).</span> 
+                <span class="pub-title">Processing Bodies Orchestrate mRNA Sorting to Gatekeep the Specification of Human Primordial Germ Cells.</span> 
+                <span class="pub-journal"><strong>Nature Communications</strong></span> 
+                <span class="pub-status">in revision</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Jiang, J., <strong>Shao, Q. (Co-first)</strong>, Xie, S., Xiao, X., … Chen, D. (2026).</span> 
+                <span class="pub-title">Functional characterization of RNA profiles in processing bodies of human embryonic stem cells and mesodermal cells.</span> 
+                <span class="pub-journal"><strong>Genomics, Proteomics and Bioinformatics</strong></span> 
+                <span class="pub-status">Accepted</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Zhang, J., Gu, Y., Tong, L., Feng, B., Dong, S., <strong>Shao, Q.</strong>, Chen, Y., Tu, H., Wang, Z., Wang, Y., Li, X., Yu, H., Lin, Z., Wang, X., Li, Z., Ai, Z., Xiang, Y., Jiang, Z., Jin, Z., Li, Z., … Chen, D. (2025).</span> 
+                <span class="pub-title">IGF2BP1 restricts the induction of human primordial germ cell fate in an m6A-dependent manner.</span> 
+                <span class="pub-journal"><strong>Cell Stem Cell</strong>.</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Wang, Z., Yu, H., Gu, Z., Shi, X., Ma, J., <strong>Shao, Q.</strong>, Yao, Y., Yao, S., Xu, Y., Gu, Y., Dai, J., Liu, Q., Shi, J., Qi, R., Jin, Y., Liu, Y., Shen, X., Huang, W., Liu, H. J., Jin, M., … Chen, D. (2025).</span> 
+                <span class="pub-title">RNA-binding proteins DND1 and NANOS3 cooperatively suppress the entry of germ cell lineage.</span> 
+                <span class="pub-journal"><strong>Nature Communications</strong>.</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Gu, Y., Chen, J., Wang, Z., <strong>Shao, Q.</strong>, Li, Z., Ye, Y., Xiao, X., … Young, R. S., Hou, L., & Chen, D. (2025).</span> 
+                <span class="pub-title">Integrated analysis and systematic characterization of the regulatory network for human germline development.</span> 
+                <span class="pub-journal"><strong>Journal of Genetics and Genomics</strong>.</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Ma, Y., Wei, W., Gong, L., Li, C., Hong, Y., Wang, X., Liang, R., <strong>Shao, Q.</strong>, Liang, Q., Huang, Shipston, M., Ouyang, H. (2022).</span> 
+                <span class="pub-title">Biomacromolecule-based agent for high-precision light-based 3D hydrogel bioprinting.</span> 
+                <span class="pub-journal"><strong>Cell Reports Physical Science</strong>.</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Hu, X., Zhang, C., Liu, B., Lai, F., Ma, S., <strong>Shao, Q.</strong>, ..., Xie, W. (2026).</span> 
+                <span class="pub-title">Establishing Polycomb regulatory landscapes in human early development.</span> 
+                <span class="pub-journal"><strong>Nature Genetics</strong></span> 
+                <span class="pub-status">In revision</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Shi, R., Lan, Y., Xia, Z., <strong>Shao, Q.</strong>, Gao, Y., Song, Y., Qian, J., Chen, D., Dou, Y., & Xie, Q. (2026).</span> 
+                <span class="pub-title">Gain-of-m6A mutations stabilise oncogenic transcripts and create an epitranscriptomic vulnerability.</span> 
+                <span class="pub-journal"><strong>Nature</strong></span> 
+                <span class="pub-status">Submitted</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Yu, H., Wang, Z., ..., <strong>Shao, Q.</strong>, Shi, G., Wei, X., Xiang, L., Zhang, C., Huang, H., Chen, D. (2026).</span> 
+                <span class="pub-title">Cytonemes function in the differentiation of human embryonic stem cells.</span> 
+                <span class="pub-journal"><strong>Nature Communications</strong></span> 
+                <span class="pub-status">In revision</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Lin, K., Chen, H., Chen, Y., Li, Z., Tian, P., <strong>Shao, Q.</strong>, Yu, H., Chen, D. (2026).</span> 
+                <span class="pub-title">Investigation of embryogenesis in a dish: the development and application of gastruloid models from pluripotent stem cells.</span> 
+                <span class="pub-journal"><strong>Cell & Bioscience</strong></span> 
+                <span class="pub-status">Accepted</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-authors">Yu, H., Wang, Z., ..., <strong>Shao, Q.</strong>, Yao, S., Chen, D. (2026).</span> 
+                <span class="pub-title">CRMA: A robust and versatile toolkit for rapid identification of regulators for germ cell fate induction from human pluripotent stem cells.</span> 
+                <span class="pub-journal"><strong>Cell Reports Methods</strong></span> 
+                <span class="pub-status">Under review</span>
+            </li>
+        </ul>
+        <div class="note-italic">
+            <i class="fa-regular fa-note-sticky"></i> Co-first authorship indicated. Status updated March 2026.
+        </div>
+    </section>
+
+    <!-- 联系与社交 (包含您已有的ORCID和GitHub) -->
+    <section class="section" id="Contact">
+        <h2 class="section-title"><i class="fa-regular fa-address-card"></i> Contact & Links</h2>
+        <div class="contact-card">
+            <div class="contact-email-group">
+                <i class="fa-regular fa-envelope"></i>
+                <div class="emails">
+                    <a href="mailto:qizhe.21@intl.zju.edu.cn">qizhe.21@intl.zju.edu.cn</a>
+                    <a href="mailto:12171015@zju.edu.cn">12171015@zju.edu.cn</a>
+                </div>
+            </div>
+            <div class="social-links">
+                <!-- ORCID 和 GitHub 已按您的信息填入 -->
+                <a href="https://orcid.org/0009-0001-8572-7019" target="_blank" title="ORCID"><i class="fa-brands fa-orcid"></i></a>
+                <a href="https://github.com/Qizhe0521" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <!-- 如果需要其他图标可以取消注释并添加链接 
+                <a href="#" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" target="_blank" title="Google Scholar"><i class="fa-brands fa-google-scholar"></i></a>
+                -->
+            </div>
+        </div>
+        <div class="availability">
+            <i class="fa-regular fa-circle-check"></i> 
+            <strong>Available for postdoctoral positions starting mid 2026</strong> — open to Cancer Biology / Developmental Biology / Stem Cell labs worldwide.
+        </div>
+    </section>
+
+    <!-- 简单的页脚 -->
+    <div class="footer-note">
+        <i class="fa-regular fa-copyright"></i> Qizhe Shao · Last updated March 2026 · Built with clarity
+        <br><span style="opacity:0.6;"></span>
+    </div>
+</div>
+</body>
+</html>
