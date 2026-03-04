@@ -17,6 +17,9 @@
     <link rel="preload" href="gif2.gif" as="image" type="image/gif" media="(min-width: 901px)">
     <link rel="preload" href="gif3.gif" as="image" type="image/gif" media="(min-width: 901px)">
     <link rel="preload" href="gif4.gif" as="image" type="image/gif" media="(min-width: 901px)">
+    <link rel="preload" href="s1.jpg" as="image" type="image/jpeg" fetchpriority="high">
+    <link rel="preload" href="s2.jpg" as="image" type="image/jpeg">
+    <link rel="preload" href="s3.jpg" as="image" type="image/jpeg" media="(min-width: 901px)">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -655,6 +658,69 @@
             font-weight: 600;
         }
 
+        /* 生活照相片集 */
+        .gallery-wrap {
+            background: rgba(245, 251, 255, 0.66);
+            border: 1px solid rgba(187, 216, 237, 0.78);
+            border-radius: 22px;
+            padding: 1rem 1rem 0.9rem;
+            box-shadow: 0 10px 20px rgba(19, 78, 118, 0.08);
+        }
+        .gallery-hint {
+            font-size: 0.82rem;
+            color: #467092;
+            margin: 0 0 0.72rem;
+        }
+        .life-carousel {
+            list-style: none;
+            display: flex;
+            gap: 0.85rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.15rem 0.15rem 0.55rem;
+            margin: 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .life-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+        .life-carousel::-webkit-scrollbar-track {
+            background: rgba(208, 228, 242, 0.6);
+            border-radius: 999px;
+        }
+        .life-carousel::-webkit-scrollbar-thumb {
+            background: rgba(111, 165, 203, 0.88);
+            border-radius: 999px;
+        }
+        .life-card {
+            flex: 0 0 230px;
+            scroll-snap-align: start;
+            border-radius: 14px;
+            border: 1px solid #c5dced;
+            background: #dce4ec;
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 14px rgba(22, 71, 106, 0.1);
+            content-visibility: auto;
+            contain-intrinsic-size: 320px 230px;
+        }
+        .life-card.landscape {
+            flex-basis: 340px;
+        }
+        .life-card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            filter: saturate(1.02) contrast(1.02);
+            transition: transform 0.18s ease;
+        }
+        .life-card:hover img {
+            transform: scale(1.02);
+        }
+
         /* 联系区域 */
         .contact-card {
             background: linear-gradient(135deg, rgba(235, 247, 255, 0.9) 0%, rgba(249, 253, 255, 0.88) 80%);
@@ -831,6 +897,13 @@
             }
             .name-cn {
                 font-size: 1.68rem;
+            }
+            .life-card {
+                flex-basis: 68vw;
+                height: 230px;
+            }
+            .life-card.landscape {
+                flex-basis: 82vw;
             }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -1061,6 +1134,34 @@
             </ul>
             <div class="note-italic">
                 <i class="fa-regular fa-note-sticky"></i> Co-first authorship indicated. Status updated March 2026.
+            </div>
+        </section>
+
+        <!-- 生活照 -->
+        <section class="section" id="life-gallery">
+            <h2 class="section-title"><i class="fa-regular fa-images"></i> Life Gallery</h2>
+            <div class="gallery-wrap">
+                <p class="gallery-hint">Swipe/drag horizontally to browse 18 photos.</p>
+                <ul class="life-carousel">
+                    <li class="life-card landscape"><img src="s1.jpg" alt="Life photo s1" loading="eager" fetchpriority="high" decoding="async"></li>
+                    <li class="life-card"><img src="s2.jpg" alt="Life photo s2" loading="eager" fetchpriority="high" decoding="async"></li>
+                    <li class="life-card"><img src="s3.jpg" alt="Life photo s3" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s4.jpg" alt="Life photo s4" loading="lazy" decoding="async"></li>
+                    <li class="life-card"><img src="s5.jpg" alt="Life photo s5" loading="lazy" decoding="async"></li>
+                    <li class="life-card"><img src="s6.jpg" alt="Life photo s6" loading="lazy" decoding="async"></li>
+                    <li class="life-card landscape"><img src="s7.jpg" alt="Life photo s7" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s8.jpg" alt="Life photo s8" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s9.jpg" alt="Life photo s9" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s10.jpg" alt="Life photo s10" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s11.jpg" alt="Life photo s11" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s12.jpg" alt="Life photo s12" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s13.jpg" alt="Life photo s13" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s14.jpg" alt="Life photo s14" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s15.jpg" alt="Life photo s15" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s16.jpg" alt="Life photo s16" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s17.jpg" alt="Life photo s17" loading="lazy" fetchpriority="low" decoding="async"></li>
+                    <li class="life-card"><img src="s18.jpg" alt="Life photo s18" loading="lazy" fetchpriority="low" decoding="async"></li>
+                </ul>
             </div>
         </section>
 
